@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مرسيدس CLS 63 AMG</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-color: #000;
+      --text-color: white;
+      --box-color: #111;
+      --accent-color: #1DB954;
+    }
+
+    body.light-mode {
+      --bg-color: #fff;
+      --text-color: #000;
+      --box-color: #f3f3f3;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background: var(--box-color);
+      color: var(--accent-color);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+    }
+
+    .hero {
+      background: url('https://www.topgear.com/sites/default/files/cars-car/image/2019/07/cls63amg.jpg') no-repeat center center/cover;
+      height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      background: var(--accent-color);
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background: #17a74a;
+      transform: scale(1.1);
+    }
+
+    .info, .gallery, .video {
+      padding: 50px 20px;
+      background: var(--box-color);
+      margin: 20px;
+      border-radius: 15px;
+    }
+
+    .info h2, .video h2 {
+      color: var(--accent-color);
+    }
+
+    .gallery img {
+      width: 90%;
+      max-width: 500px;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    footer {
+      background: var(--box-color);
+      color: var(--text-color);
+      padding: 15px 0;
+    }
+
+    .rating-stars {
+      font-size: 30px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .rating-stars .active {
+      color: var(--accent-color);
+    }
+
+    table {
+      width: 100%;
+      max-width: 800px;
+      margin: 20px auto;
+      border-collapse: collapse;
+      color: var(--text-color);
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+    }
+
+    th {
+      background-color: var(--accent-color);
+      color: black;
+    }
+
+    .music-control {
+      background-color: var(--accent-color);
+      color: black;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .music-control:hover {
+      background-color: #17a74a;
+    }
+
+    .toggle-theme {
+      background: var(--accent-color);
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      transition: 0.3s ease;
+    }
+
+    .toggle-theme:hover {
+      background-color: #17a74a;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 800px;
+      height: 450px;
+      border: none;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+
+    .telegram-link {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .telegram-link a {
+      font-size: 18px;
+      text-decoration: none;
+      color: var(--accent-color);
+      margin-left: 10px;
+    }
+
+    .telegram-link a:hover {
+      color: #17a74a;
+    }
+
+    .telegram-icon {
+      width: 30px;
+      height: 30px;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bgMusic" src="music.mp3" preload="auto" loop></audio>
+
+  <header>
+    <img src="logo.png" alt="شعار مرسيدس" />
+    <h1>مرسيدس CLS 63 AMG</h1>
+  </header>
+
+  <section class="hero">
+    <h2>القوة والأناقة في سيارة واحدة</h2>
+  </section>
+
+  <section class="info">
+    <h2>لمحة عن CLS 63 AMG</h2>
+    <p>سيارة CLS 63 AMG من مرسيدس تجمع بين الأداء الرياضي القوي والفخامة الألمانية الخالدة. تتميز بتصميم كوبيه بأربعة أبواب ومقصورة مكسوة بأفخم المواد، مع تقنيات متطورة توفر تجربة قيادة لا مثيل لها.</p>
+    <ul style="text-align: right; direction: rtl; line-height: 2;">
+      <li><strong>المحرك:</strong> V8 ثنائي التيربو سعة 5.5 لتر</li>
+      <li><strong>القوة:</strong> 577 حصان</li>
+      <li><strong>عزم الدوران:</strong> 800 نيوتن متر</li>
+      <li><strong>التسارع:</strong> 0 - 100 كم/س خلال 3.6 ثانية</li>
+      <li><strong>السرعة القصوى:</strong> 250 كم/س (محددة إلكترونيًا)</li>
+      <li><strong>ناقل الحركة:</strong> أوتوماتيكي بـ 7 سرعات</li>
+      <li><strong>نظام الدفع:</strong> 4MATIC</li>
+      <li><strong>استهلاك الوقود:</strong> 10.2 لتر / 100 كم</li>
+      <li><strong>تقنيات:</strong> شاشة مزدوجة، نظام صوتي Burmester، مقاعد مبرّدة ومدفّأة، كاميرا 360، تنبيه النقطة العمياء</li>
+    </ul>
+  </section>
+
+  <section class="info">
+    <h2>قيّم السيارة</h2>
+    <div id="rating" class="rating-stars">
+      <span onclick="rate(1)">★</span>
+      <span onclick="rate(2)">★</span>
+      <span onclick="rate(3)">★</span>
+      <span onclick="rate(4)">★</span>
+      <span onclick="rate(5)">★</span>
+    </div>
+    <p id="rating-value">اختر تقييمك</p>
+  </section>
+
+  <section class="info">
+    <h2>مقارنة مع المنافسين</h2>
+    <table>
+      <tr>
+        <th>الميزة</th>
+        <th>CLS 63 AMG</th>
+        <th>BMW M8</th>
+        <th>Audi RS7</th>
+      </tr>
+      <tr>
+        <td>القوة الحصانية</td>
+        <td>577 حصان</td>
+        <td>617 حصان</td>
+        <td>591 حصان</td>
+      </tr>
+      <tr>
+        <td>التسارع (0-100 كم/س)</td>
+        <td>3.6 ثانية</td>
+        <td>3.2 ثانية</td>
+        <td>3.5 ثانية</td>
+      </tr>
+      <tr>
+        <td>الدفع</td>
+        <td>4MATIC</td>
+        <td>xDrive</td>
+        <td>quattro</td>
+      </tr>
+      <tr>
+        <td>السعر التقريبي</td>
+        <td>100,000$</td>
+        <td>130,000$</td>
+        <td>120,000$</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="gallery">
+    <h2>معرض الصور</h2>
+    <img src="c1.jpg" alt="CLS 63 AMG من الأمام">
+    <img src="c2.jpg" alt="CLS 63 AMG من الجانب">
+    <img src="c3.jpg" alt="يمين السيارة">
+    <img src="c4.jpg" alt="يسار السيارة">
+    <img src="c5.jpg" alt="العجلات">
+    <img src="c6.jpg" alt="المحرك">
+    <img src="c7.jpg" alt="عداد السيارة">
+    <img src="c8.jpg" alt="داخلية السيارة">
+    <img src="c9.jpg" alt="مقعد أمامي">
+    <img src="c10.jpg" alt="مقاعد خلفية">
+  </section>
+
+  <section class="video">
+    <h2>فيديو تعريفي</h2>
+    <video controls width="100%" style="max-width: 800px; border-radius: 15px; margin-top: 20px;">
+      <source src="clsvid.mp4" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+  </section>
+
+  <footer>
+    <p>&copy; dev_erorr - جميع الحقوق محفوظة</p>
+    <div class="telegram-link">
+      <a href="https://t.me/dev_erorr" target="_blank">
+        <img src="telegram.png" alt="Telegram" class="telegram-icon"> انقر هنا للتواصل   
+      </a>
+    </div>
+  </footer>
+
+  <div class="music-control" onclick="toggleMusic()">تشغيل الموسيقى</div>
+  <div class="toggle-theme" onclick="toggleMode()">تبديل الوضع</div>
+
+  <script>
+    function rate(stars) {
+      const starsElements = document.querySelectorAll('#rating span');
+      starsElements.forEach((star, index) => {
+        star.classList.toggle('active', index < stars);
+      });
+      document.getElementById('rating-value').innerText = `تم التقييم: ${stars} ${stars === 1 ? 'نجمة' : 'نجوم'}`;
+    }
+
+    function toggleMusic() {
+      var music = document.getElementById("bgMusic");
+      var control = document.querySelector(".music-control");
+      if (music.paused) {
+        music.play();
+        control.innerText = "إيقاف الموسيقى";
+      } else {
+        music.pause();
+        control.innerText = "تشغيل الموسيقى";
+      }
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+      }
+    };
+
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+  </script>
+</body>
+</html>
