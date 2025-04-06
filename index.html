@@ -239,6 +239,11 @@
   </section>
 
   <section class="info">
+    <h2>ملخص التقييمات من الزوار</h2>
+    <p id="rating-summary">تحميل البيانات...</p>
+  </section>
+
+  <section class="info">
     <h2>مقارنة مع المنافسين</h2>
     <table>
       <tr>
@@ -298,10 +303,10 @@
 
   <footer>
     <p>&copy; dev_erorr - جميع الحقوق محفوظة</p>
-     <p>
-    عدد الزيارات: 
-    <img src="https://visitor-badge.laobi.icu/badge?page_id=dev-erorr.cls63" alt="عدد الزيارات">
-  </p>
+    <p>
+      عدد الزيارات: 
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=dev-erorr.cls63" alt="عدد الزيارات">
+    </p>
     <div class="telegram-link">
       <a href="https://t.me/dev_erorr" target="_blank">
         <img src="telegram.png" alt="Telegram" class="telegram-icon"> انقر هنا للتواصل   
@@ -313,36 +318,39 @@
   <div class="toggle-theme" onclick="toggleMode()">تبديل الوضع</div>
 
   <script>
+    const ratingKey = 'cls63amg-rating';
+    const countKey = 'cls63amg-count';
+
+    // عند التقييم
     function rate(stars) {
+      // تغيّر شكل النجوم
       const starsElements = document.querySelectorAll('#rating span');
       starsElements.forEach((star, index) => {
         star.classList.toggle('active', index < stars);
       });
+
       document.getElementById('rating-value').innerText = `تم التقييم: ${stars} ${stars === 1 ? 'نجمة' : 'نجوم'}`;
+
+      // أرسل التقييم لـ CountAPI
+      fetch(`https://api.countapi.xyz/update/dev_erorr/${ratingKey}?amount=${stars}`);
+      fetch(`https://api.countapi.xyz/update/dev_erorr/${countKey}?amount=1`)
+        .then(() => loadRatingSummary());
     }
 
-    function toggleMusic() {
-      var music = document.getElementById("bgMusic");
-      var control = document.querySelector(".music-control");
-      if (music.paused) {
-        music.play();
-        control.innerText = "إيقاف الموسيقى";
-      } else {
-        music.pause();
-        control.innerText = "تشغيل الموسيقى";
-      }
+    // تحميل عدد التقييمات والمتوسط
+    function loadRatingSummary() {
+      Promise.all([
+        fetch(`https://api.countapi.xyz/get/dev_erorr/${ratingKey}`).then(res => res.json()),
+        fetch(`https://api.countapi.xyz/get/dev_erorr/${countKey}`).then(res => res.json())
+      ]).then(([rating, count]) => {
+        const total = rating.value || 0;
+        const totalCount = count.value || 0;
+        const average = totalCount > 0 ? (total / totalCount).toFixed(2) : 0;
+        document.getElementById('rating-summary').innerText = `عدد التقييمات: ${totalCount} | المتوسط: ${average} ⭐`;
+      });
     }
 
-    window.onload = () => {
-      if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-      }
-    };
-
-    function toggleMode() {
-      document.body.classList.toggle('light-mode');
-      localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-    }
+    loadRatingSummary();
   </script>
 </body>
 </html>
