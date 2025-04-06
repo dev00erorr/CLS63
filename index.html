@@ -195,6 +195,69 @@
       height: 30px;
       margin: 0 10px;
     }
+
+    /* Media Queries for Mobile */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      header img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero {
+        height: 300px;
+      }
+
+      .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .gallery img {
+        width: 100%;
+      }
+
+      .music-control {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+
+      .toggle-theme {
+        font-size: 14px;
+        padding: 10px 20px;
+      }
+
+      table {
+        font-size: 12px;
+      }
+
+      .rating-stars {
+        font-size: 25px;
+      }
+
+      iframe {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h2 {
+        font-size: 18px;
+      }
+
+      .info h2 {
+        font-size: 20px;
+      }
+
+      .gallery img {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -323,47 +386,34 @@
       const music = document.getElementById('bgMusic');
       if (music.paused) {
         music.play();
-        document.querySelector('.music-control').innerText = "إيقاف الموسيقى";
+        document.querySelector('.music-control').textContent = 'إيقاف الموسيقى';
       } else {
         music.pause();
-        document.querySelector('.music-control').innerText = "تشغيل الموسيقى";
+        document.querySelector('.music-control').textContent = 'تشغيل الموسيقى';
       }
     }
 
-    // تبديل الوضع المظلم/الفاتح
+    // تغيير الوضع الداكن/الفاتح
     function toggleMode() {
       document.body.classList.toggle('light-mode');
     }
 
-    const ratingKey = 'cls63amg-rating';
-    const countKey = 'cls63amg-count';
-
-    function rate(stars) {
-      const starsElements = document.querySelectorAll('#rating span');
-      starsElements.forEach((star, index) => {
-        star.classList.toggle('active', index < stars);
+    // تقييم السيارة
+    function rate(star) {
+      const stars = document.querySelectorAll('.rating-stars span');
+      stars.forEach((starElement, index) => {
+        if (index < star) {
+          starElement.classList.add('active');
+        } else {
+          starElement.classList.remove('active');
+        }
       });
-
-      document.getElementById('rating-value').innerText = `تم التقييم: ${stars} ${stars === 1 ? 'نجمة' : 'نجوم'}`;
-
-      fetch(`https://api.countapi.xyz/update/dev_erorr/${ratingKey}?amount=${stars}`);
-      fetch(`https://api.countapi.xyz/update/dev_erorr/${countKey}?amount=1`)
-        .then(() => loadRatingSummary());
+      document.getElementById('rating-value').textContent = 'تم تقييم السيارة بـ ' + star + ' نجوم';
     }
 
-    function loadRatingSummary() {
-      Promise.all([
-        fetch(`https://api.countapi.xyz/get/dev_erorr/${ratingKey}`).then(res => res.json()),
-        fetch(`https://api.countapi.xyz/get/dev_erorr/${countKey}`).then(res => res.json())
-      ]).then(([rating, count]) => {
-        const total = rating.value || 0;
-        const totalCount = count.value || 0;
-        const average = totalCount > 0 ? (total / totalCount).toFixed(2) : 0;
-        document.getElementById('rating-summary').innerText = `عدد التقييمات: ${totalCount} | المتوسط: ${average} ⭐`;
-      });
-    }
-
-    loadRatingSummary();
+    // التقييمات
+    document.getElementById('rating-summary').textContent = 'يتم جمع التقييمات من الزوار ...';
   </script>
+
 </body>
 </html>
